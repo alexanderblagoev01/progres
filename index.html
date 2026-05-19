@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>ПРОГРЕС — тренировъчен дневник</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ПРОГРЕС">
+<meta name="theme-color" content="#0e0f0d">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEOklEQVR4nO3cy1bbSBSGUVmrp0C/So/y/sOM8ioBHoAeOYsYXyRVlVT1s/csFyxb+jg5yJDT1Innl6ePo58DZd5e309HP4fDnoCA8x0R+K4HFPH3tVfczQ8iYi61jLvZAwuZR1qEXf0BhcxaNcOeaz3QNImZbWp2U+UzQ8jUUjqtiye0mKmptKeioMVMCyVdbRrvQmYva1eQ1RNazOxpbW+rghYzR1jT3eKgxcyRlvZX9T40HG1R0KYzPVjS4cOgxUxPHvV4N2gx06N7XdqhiXIzaNOZnt3q82rQYmYE1zq1chDlS9CmMyO57NWEJspfQZvOjOhztyY0UQRNlD9BWzcY2blfE5oogibKaZqsG+QwoYkiaKIImiiz/ZkkJjRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRPln70P+PP3fw//zo9/f+3wTKiht+t52us/a1zywi8Ju1+9Xs9dVo4tL77k42ir5+vZPOjSFyHqvvR+PZsGXevJi7oPI1xPdzmI0izo2p+FpvSxRrmeJjRRBE0UQRPl6juFj/Ybb3iwl7UtfpnQS5Z1X6Cxhy0tzvf+sPRgsNXWFudrv9nioLBUSYvz1gcoOTjcUtqiuxxEETRRBE0UQRNF0EQRNFF2/yHZmtwybGfUb28YMmght3c+x6OFPdzKIeZ9jXa+hwp6tJObYqTzPlTQ8IigiSJoogiaKIImiqCJImiiCJooQwU92tuwKUY670MFPU1jndwEo53vIb856XySR3pLdjSjhXw2ZNBno5502hlu5YB7BE0UQRNF0EQRNFEETZR5mspuf7l1Rk2lLc6ff7HnweGWkhbna7/Z6qCw1NYWv+zQSx5IzOxhS4tX3/oWLL1Y26K7HEQRNFEETZRmQdfew+31xxrleprQRGkadK3PQtO5DyNcz+YTuvTJi7kvvV/PXVaOrS9CzH3q+Xqenl+ePpof5ZMlP9gq5HH0dj13DxpacpeDKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJMr+9vp+OfhJQiwlNFEETRdBEmadpmuzRJHh7fT+Z0EQRNFH+BG3tYGTnfk1oogiaKH8Fbe1gRJ+7NaGJ8iVoU5qRXPZqQhPlatCmNCO41unNCS1qenarTysHUe4GbUrTo3tdPpzQoqYnj3pctHKImh4s6dAOTZTFQZvSHGlpf6smtKg5wpruVq8comZPa3srivP55emj5OPhlq2Ds+iLQtOaFkq6Kr7LIWpqKu2paoxWELaqNRir3oc2rdmiZjfNAjSteaTFAGw+UYXNpZb/ku+6Ioj7+9prHT1s5xV3viO+pvofAtdLCKuW2zAAAAAASUVORK5CYII=">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0e0f0d; --panel: #181a16; --panel-2: #20231d; --line: #2e3128;
+    --ink: #f3f4ee; --muted: #8a8d80; --acid: #d7ff3e; --acid-dim: #97ad3a;
+    --easy: #6fd86f; --mid: #d7ff3e; --hard: #ffb13e; --max: #ff5d4a; --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { background: var(--bg); }
+  body {
+    font-family: 'Archivo', sans-serif; color: var(--ink);
+    min-height: 100vh; min-height: 100dvh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  #app-root {
+    min-height: 100%; padding: 18px 14px 40px; max-width: 560px; margin: 0 auto;
+    background-image: radial-gradient(circle at 90% 0%, rgba(215,255,62,0.06), transparent 45%);
+  }
+  .head h1 {
+    font-family: 'Anton', sans-serif; font-size: 34px; letter-spacing: 0.5px;
+    line-height: 0.95; text-transform: uppercase;
+  }
+  .head h1 .accent { color: var(--acid); }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 18px; font-weight: 500; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+  .tab {
+    flex: 1; padding: 12px 8px; border: 1px solid var(--line); background: var(--panel);
+    color: var(--muted); font-family: 'Anton', sans-serif; font-size: 15px;
+    letter-spacing: 0.6px; text-transform: uppercase; border-radius: 10px; cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .tab.active { background: var(--acid); color: #14160f; border-color: var(--acid); }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 16px; margin-bottom: 14px;
+  }
+
+  .day-banner {
+    background: linear-gradient(135deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px; margin-bottom: 14px; position: relative; overflow: hidden;
+  }
+  .day-banner::before {
+    content: ''; position: absolute; right: -30px; top: -30px; width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(215,255,62,0.12), transparent 70%);
+  }
+  .day-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--acid-dim); font-weight: 700; }
+  .day-name { font-family: 'Anton', sans-serif; font-size: 27px; text-transform: uppercase;
+    line-height: 1; margin: 4px 0 2px; }
+  .day-badge {
+    display: inline-block; background: var(--acid); color: #14160f;
+    font-family: 'Anton', sans-serif; font-size: 14px; padding: 2px 10px;
+    border-radius: 6px; margin-right: 8px; vertical-align: 2px;
+  }
+  .day-prog { font-size: 12px; color: var(--muted); margin-top: 8px; font-weight: 600; }
+  .swap-btn {
+    margin-top: 12px; background: var(--panel); border: 1px solid var(--line);
+    color: var(--muted); font-size: 12px; font-weight: 700; padding: 8px 12px;
+    border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .day-picker { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin-top: 12px; }
+  .day-pick {
+    padding: 10px 4px; border: 1px solid var(--line); background: var(--panel);
+    border-radius: 9px; cursor: pointer; text-align: center;
+  }
+  .day-pick.cur { border-color: var(--acid); background: rgba(215,255,62,0.12); }
+  .day-pick .dp-id { font-family: 'Anton', sans-serif; font-size: 18px; }
+  .day-pick .dp-n { font-size: 9px; color: var(--muted); margin-top: 2px;
+    text-transform: uppercase; font-weight: 700; line-height: 1.1; }
+
+  .ex-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    margin-bottom: 10px; overflow: hidden;
+  }
+  .ex-head { padding: 13px 14px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+  .ex-head.done { background: rgba(111,216,111,0.07); }
+  .ex-check {
+    width: 26px; height: 26px; border-radius: 7px; border: 1.5px solid var(--line);
+    flex: none; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: var(--bg);
+  }
+  .ex-check.full { background: var(--easy); border-color: var(--easy); }
+  .ex-check.part { border-color: var(--acid); color: var(--acid); background: transparent; }
+  .ex-info { flex: 1; min-width: 0; }
+  .ex-name { font-weight: 700; font-size: 14px; }
+  .ex-target { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .ex-dots { display: flex; gap: 3px; margin-top: 5px; }
+  .ex-dot { width: 16px; height: 5px; border-radius: 2px; background: var(--line); }
+  .ex-dot.f { background: var(--acid); }
+  .ex-chev { color: var(--muted); font-size: 13px; flex: none; }
+
+  .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--line); }
+  .ref {
+    background: var(--panel-2); border-radius: 9px; padding: 9px 11px; margin: 12px 0;
+    font-size: 12.5px; color: var(--muted); line-height: 1.45;
+  }
+  .ref b { color: var(--acid); }
+  .ref .up { color: var(--easy); font-weight: 700; }
+
+  label.fld { display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; font-weight: 700; }
+  .row2 { display: flex; gap: 9px; }
+  .row2 > div { flex: 1; }
+  .stepper { display: flex; }
+  .stepper input {
+    width: 100%; background: var(--panel-2); color: var(--ink); border: 1px solid var(--line);
+    padding: 11px 4px; font-family: 'Archivo',sans-serif; font-size: 16px; font-weight: 700;
+    text-align: center; border-radius: 0; border-left: none; border-right: none;
+  }
+  .stepper button {
+    width: 40px; flex: none; background: var(--panel-2); color: var(--acid);
+    border: 1px solid var(--line); font-size: 20px; font-family: 'Anton',sans-serif; cursor: pointer;
+  }
+  .stepper button:first-child { border-radius: 9px 0 0 9px; }
+  .stepper button:last-child { border-radius: 0 9px 9px 0; }
+  input:focus { outline: 2px solid var(--acid-dim); }
+
+  .diff-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 5px; margin-top: 12px; }
+  .diff { padding: 8px 2px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--panel-2); cursor: pointer; text-align: center; }
+  .diff .n { font-family: 'Anton',sans-serif; font-size: 16px; }
+  .diff .t { font-size: 8px; text-transform: uppercase; color: var(--muted);
+    margin-top: 1px; font-weight: 700; }
+  .diff[data-d="1"].sel,.diff[data-d="2"].sel { border-color: var(--easy); background: rgba(111,216,111,0.14); border-width: 2px; }
+  .diff[data-d="3"].sel { border-color: var(--mid); background: rgba(215,255,62,0.14); border-width: 2px; }
+  .diff[data-d="4"].sel { border-color: var(--hard); background: rgba(255,177,62,0.14); border-width: 2px; }
+  .diff[data-d="5"].sel { border-color: var(--max); background: rgba(255,93,74,0.14); border-width: 2px; }
+
+  .add-btn {
+    width: 100%; margin-top: 12px; padding: 13px; background: var(--acid); color: #14160f;
+    border: none; border-radius: 10px; font-family: 'Anton',sans-serif; font-size: 16px;
+    letter-spacing: 0.6px; text-transform: uppercase; cursor: pointer;
+  }
+  .add-btn:active { transform: scale(0.985); }
+
+  .logged-set {
+    display: flex; align-items: center; gap: 9px; padding: 8px 0;
+    border-top: 1px solid var(--line); font-size: 13px;
+  }
+  .logged-set:first-of-type { margin-top: 10px; }
+  .ls-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .ls-txt { flex: 1; }
+  .ls-load { font-family: 'Anton',sans-serif; font-size: 16px; }
+  .ls-load span { font-size: 10px; color: var(--muted); }
+  .del { background: none; border: none; color: var(--muted); font-size: 15px; cursor: pointer; padding: 2px 5px; }
+
+  .finish-btn {
+    width: 100%; padding: 16px; margin-top: 6px; background: transparent;
+    border: 2px solid var(--acid); color: var(--acid); border-radius: 12px;
+    font-family: 'Anton',sans-serif; font-size: 17px; letter-spacing: 0.7px;
+    text-transform: uppercase; cursor: pointer;
+  }
+  .finish-btn:active { background: var(--acid); color: #14160f; }
+
+  .sect-title { font-family: 'Anton',sans-serif; font-size: 16px; letter-spacing: 0.6px;
+    text-transform: uppercase; margin: 4px 0 10px; color: var(--muted); }
+  select { width: 100%; background: var(--panel-2); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 10px; padding: 13px 12px; font-family: 'Archivo',sans-serif;
+    font-size: 16px; font-weight: 600; }
+  .stat-row { display: flex; gap: 10px; margin-bottom: 14px; }
+  .stat { flex: 1; background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 11px; padding: 12px; }
+  .stat .v { font-family: 'Anton',sans-serif; font-size: 24px; color: var(--acid); }
+  .stat .l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--muted); font-weight: 700; }
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 160px;
+    padding: 10px 4px 0; overflow-x: auto; }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 5px;
+    flex: 1; min-width: 34px; }
+  .bar { width: 100%; max-width: 38px; background: linear-gradient(180deg,var(--acid),var(--acid-dim));
+    border-radius: 5px 5px 0 0; min-height: 4px; }
+  .bar-val { font-family: 'Anton',sans-serif; font-size: 13px; }
+  .bar-date { font-size: 9px; color: var(--muted); }
+  .pr-tag { display: inline-block; background: var(--acid); color: #14160f; font-size: 9px;
+    font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 4px; }
+  .set-row { display: flex; align-items: center; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--line); }
+  .set-row:last-child { border-bottom: none; }
+  .set-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .set-main { flex: 1; min-width: 0; }
+  .set-ex { font-weight: 700; font-size: 13.5px; }
+  .set-meta { font-size: 11.5px; color: var(--muted); }
+  .set-load { font-family: 'Anton',sans-serif; font-size: 19px; }
+  .set-load span { font-size: 10px; color: var(--muted); }
+  .empty { text-align: center; color: var(--muted); padding: 24px 10px;
+    font-size: 13.5px; line-height: 1.5; }
+
+  .backup { display: flex; gap: 9px; margin-top: 4px; }
+  .backup button {
+    flex: 1; padding: 12px 6px; border-radius: 10px; cursor: pointer;
+    font-family: 'Anton',sans-serif; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.5px; border: 1px solid var(--line);
+    background: var(--panel-2); color: var(--ink);
+  }
+  .backup button.exp { border-color: var(--acid-dim); color: var(--acid); }
+  .backup-note { font-size: 11.5px; color: var(--muted); margin-top: 10px; line-height: 1.45; }
+  .backup-note b { color: var(--acid-dim); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--acid); color: #14160f; padding: 11px 20px; border-radius: 30px;
+    font-weight: 800; font-size: 14px; opacity: 0; pointer-events: none;
+    transition: all 0.25s ease; z-index: 50; max-width: 90%; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div id="app-root">
+  <div class="head"><h1>ПРОГРЕС<span class="accent">.</span></h1></div>
+  <div class="sub">Тренировката за деня е готова — ти само вписвай теглата.</div>
+  <div class="tabs">
+    <button class="tab active" data-tab="log">Тренировка</button>
+    <button class="tab" data-tab="prog">Прогрес</button>
+  </div>
+  <div id="view-log"></div>
+  <div id="view-prog" style="display:none"></div>
+</div>
+<input type="file" id="import-file" accept="application/json,.json" style="display:none">
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  const KEY = 'workout-log-v1';
+  const STATE = 'workout-state-v1';
+
+  const PROGRAM = [
+    { id:'A', name:'Гръб и Бицепс', ex:[
+      {n:'Набирания / Гребане с EZ лост', sets:4},
+      {n:'Гребане на наклонена пейка', sets:3},
+      {n:'Pullover с EZ лост', sets:3},
+      {n:'EZ лост сгъване (бицепс)', sets:3},
+      {n:'Spider / наклонен бицепс', sets:3},
+    ]},
+    { id:'B', name:'Гърди, Рамене, Трицепс', ex:[
+      {n:'EZ лост лежанка', sets:4},
+      {n:'EZ наклонена преса', sets:3},
+      {n:'EZ преса над глава', sets:3},
+      {n:'Skullcrushers', sets:3},
+      {n:'Тесен хват преса', sets:3},
+    ]},
+    { id:'C', name:'Крака и Корем', ex:[
+      {n:'Български клек', sets:4},
+      {n:'Качване на пейка', sets:3},
+      {n:'Хип тръст', sets:3},
+      {n:'Висящо коляно / планк', sets:3},
+    ]},
+    { id:'D', name:'Ръце и Гръб', ex:[
+      {n:'Гребане с EZ лост', sets:4},
+      {n:'Pullover с EZ лост', sets:3},
+      {n:'Drag curls (бицепс)', sets:3},
+      {n:'Трицепс над глава', sets:3},
+      {n:'Бицепс/трицепс изгаряне', sets:2},
+    ]},
+  ];
+  const DIFF = [{n:1,t:'Лесно'},{n:2,t:'Умерено'},{n:3,t:'Трудно'},{n:4,t:'Мн. трудно'},{n:5,t:'На предел'}];
+  const DC = {1:'var(--easy)',2:'var(--easy)',3:'var(--mid)',4:'var(--hard)',5:'var(--max)'};
+
+  let log = [];
+  let state = { currentDay: 0 };
+  let ui = { expandedEx: null, pickerOpen: false, progEx: PROGRAM[0].ex[0].n };
+  let sel = { weight: 20, reps: 8, diff: 3 };
+
+  const $ = s => document.querySelector(s);
+  const toast = m => { const t=$('#toast'); t.textContent=m; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2200); };
+  const todayKey = () => new Date().toISOString().slice(0,10);
+  const fmtDate = iso => { const d=new Date(iso); return d.getDate()+'.'+(d.getMonth()+1); };
+  const e1rm = (w,r) => Math.round(w*(1+r/30));
+
+  // --- Локално запазване в самия телефон (localStorage) ---
+  function load() {
+    try { const r=localStorage.getItem(KEY); if(r) log=JSON.parse(r); } catch(e){ log=[]; }
+    try { const r=localStorage.getItem(STATE); if(r) state=JSON.parse(r); } catch(e){ state={currentDay:0}; }
+    if (typeof state.currentDay!=='number'||state.currentDay<0||state.currentDay>3) state.currentDay=0;
+  }
+  function saveLog(){ try{ localStorage.setItem(KEY,JSON.stringify(log)); }catch(e){ toast('Грешка при запис'); } }
+  function saveState(){ try{ localStorage.setItem(STATE,JSON.stringify(state)); }catch(e){} }
+
+  // --- Експорт / импорт за бекъп ---
+  function exportData(){
+    const payload = { app:'progres-tracker', version:1, exported:new Date().toISOString(),
+      log:log, state:state };
+    const blob = new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'progres-backup-' + todayKey() + '.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('Бекъп файлът е свален ✓');
+  }
+  function importData(file){
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        if(!data || !Array.isArray(data.log)) throw new Error('bad');
+        if(!confirm('Това ще замени текущите ти данни с тези от файла. Продължаваш ли?')) return;
+        log = data.log;
+        if(data.state && typeof data.state.currentDay==='number') state = data.state;
+        saveLog(); saveState();
+        ui.expandedEx=null; ui.pickerOpen=false;
+        renderLog();
+        toast('Данните са възстановени ✓');
+      } catch(e){ toast('Файлът не е валиден бекъп'); }
+    };
+    reader.onerror = () => toast('Грешка при четене на файла');
+    reader.readAsText(file);
+  }
+
+  function lastSession(ex){
+    const rows=log.filter(x=>x.exercise===ex);
+    if(!rows.length) return null;
+    const ld=rows[rows.length-1].date;
+    return rows.filter(x=>x.date===ld);
+  }
+  function bestSet(rows){ return rows.reduce((b,x)=>e1rm(x.weight,x.reps)>e1rm(b.weight,b.reps)?x:b,rows[0]); }
+  function todaySets(ex){ return log.filter(x=>x.date===todayKey()&&x.exercise===ex); }
+
+  function adviceFor(ex){
+    const ls=lastSession(ex);
+    if(!ls){ return {ref:`Първа тренировка за това упражнение — логни серия и оттук нататък ще ти давам цел.`, isNew:true}; }
+    const b=bestSet(ls);
+    const avg=ls.reduce((s,x)=>s+x.diff,0)/ls.length;
+    let adv;
+    if(avg<=2.3) adv=`Беше лесно — <span class="up">качи +1–2.5 кг</span> или добави повторение.`;
+    else if(avg<=3.6) adv=`Добра тежест — цели <span class="up">+1 повторение</span> на серия.`;
+    else adv=`Беше тежко — задръж теглото, изпипай техниката.`;
+    return {ref:`Последно (${fmtDate(b.date)}): най-добра серия <b>${b.weight} кг × ${b.reps}</b>. ${adv}`, last:b};
+  }
+
+  function renderLog(){
+    const day=PROGRAM[state.currentDay];
+    const totalSets=day.ex.reduce((s,e)=>s+e.sets,0);
+    const doneSets=day.ex.reduce((s,e)=>s+Math.min(todaySets(e.n).length,e.sets),0);
+
+    let banner=`<div class="day-banner">
+      <div class="day-label">Днешна тренировка · ротация</div>
+      <div class="day-name"><span class="day-badge">${day.id}</span>${day.name}</div>
+      <div class="day-prog">${doneSets} / ${totalSets} серии завършени</div>
+      <button class="swap-btn" id="swap">${ui.pickerOpen?'Затвори':'Смени деня ▾'}</button>
+      ${ui.pickerOpen?`<div class="day-picker">${PROGRAM.map((d,i)=>`
+        <div class="day-pick ${i===state.currentDay?'cur':''}" data-day="${i}">
+          <div class="dp-id">${d.id}</div><div class="dp-n">${d.name.split(' ')[0]}</div>
+        </div>`).join('')}</div>`:''}
+    </div>`;
+
+    let cards=day.ex.map(e=>{
+      const done=todaySets(e.n);
+      const full=done.length>=e.sets;
+      const expanded=ui.expandedEx===e.n;
+      const adv=adviceFor(e.n);
+      const dots=Array.from({length:e.sets},(_,i)=>`<div class="ex-dot ${i<done.length?'f':''}"></div>`).join('');
+      const check=full?'<div class="ex-check full">✓</div>'
+        :done.length?`<div class="ex-check part">${done.length}</div>`
+        :'<div class="ex-check"></div>';
+
+      let body='';
+      if(expanded){
+        const logged=done.map(x=>`
+          <div class="logged-set" data-id="${x.id}">
+            <div class="ls-dot" style="background:${DC[x.diff]}"></div>
+            <div class="ls-txt">${x.reps} повт. · трудност ${x.diff}/5</div>
+            <div class="ls-load">${x.weight}<span> кг</span></div>
+            <button class="del" data-del="${x.id}">✕</button>
+          </div>`).join('');
+        body=`<div class="ex-body">
+          <div class="ref">${adv.ref}</div>
+          <div class="row2">
+            <div><label class="fld">Тегло (кг)</label>
+              <div class="stepper"><button data-st="w-">−</button>
+                <input id="w-in" type="number" inputmode="decimal" value="${sel.weight}">
+                <button data-st="w+">+</button></div></div>
+            <div><label class="fld">Повторения</label>
+              <div class="stepper"><button data-st="r-">−</button>
+                <input id="r-in" type="number" inputmode="numeric" value="${sel.reps}">
+                <button data-st="r+">+</button></div></div>
+          </div>
+          <div class="diff-grid">${DIFF.map(d=>`
+            <div class="diff ${d.n===sel.diff?'sel':''}" data-d="${d.n}">
+              <div class="n">${d.n}</div><div class="t">${d.t}</div></div>`).join('')}</div>
+          <button class="add-btn" data-add="${e.n}">+ Добави серия</button>
+          ${logged}
+        </div>`;
+      }
+      return `<div class="ex-card">
+        <div class="ex-head ${full?'done':''}" data-ex="${e.n}">
+          ${check}
+          <div class="ex-info">
+            <div class="ex-name">${e.n}</div>
+            <div class="ex-target">Цел: ${e.sets} серии · 6–12 повторения</div>
+            <div class="ex-dots">${dots}</div>
+          </div>
+          <div class="ex-chev">${expanded?'▲':'▼'}</div>
+        </div>${body}</div>`;
+    }).join('');
+
+    const backup=`<div class="panel">
+      <div class="sect-title">Бекъп на данните</div>
+      <div class="backup">
+        <button class="exp" id="exp-btn">⤓ Експорт</button>
+        <button id="imp-btn">⤒ Импорт</button>
+      </div>
+      <div class="backup-note">Данните се пазят <b>автоматично в този телефон</b> — не е нужно да експортираш всеки път.
+      Натисни „Експорт" веднъж на месец (или при смяна на телефон), за да си запазиш бекъп файл в Files/iCloud.</div>
+    </div>`;
+
+    $('#view-log').innerHTML = banner + cards +
+      `<button class="finish-btn" id="finish">Завърши тренировка ${day.id} ✓</button>` + backup;
+    bindLog();
+  }
+
+  function bindLog(){
+    const swap=$('#swap'); if(swap) swap.onclick=()=>{ ui.pickerOpen=!ui.pickerOpen; renderLog(); };
+    document.querySelectorAll('[data-day]').forEach(el=>{
+      el.onclick=()=>{ state.currentDay=+el.dataset.day; ui.pickerOpen=false;
+        ui.expandedEx=null; saveState(); renderLog(); };
+    });
+    document.querySelectorAll('[data-ex]').forEach(el=>{
+      el.onclick=()=>{ ui.expandedEx = ui.expandedEx===el.dataset.ex?null:el.dataset.ex;
+        sel={weight:20,reps:8,diff:3};
+        const adv=adviceFor(el.dataset.ex);
+        if(adv.last){ sel.weight=adv.last.weight; sel.reps=adv.last.reps; }
+        renderLog(); };
+    });
+    document.querySelectorAll('[data-st]').forEach(b=>{
+      b.onclick=()=>{
+        const k=b.dataset.st;
+        if(k[0]==='w') sel.weight=Math.max(0,(parseFloat($('#w-in').value)||0)+(k[1]==='+'?2.5:-2.5));
+        else sel.reps=Math.max(1,(parseInt($('#r-in').value)||0)+(k[1]==='+'?1:-1));
+        $('#w-in').value=sel.weight; $('#r-in').value=sel.reps;
+      };
+    });
+    if($('#w-in')) $('#w-in').oninput=e=>sel.weight=parseFloat(e.target.value)||0;
+    if($('#r-in')) $('#r-in').oninput=e=>sel.reps=parseInt(e.target.value)||0;
+    document.querySelectorAll('.diff').forEach(el=>{
+      el.onclick=()=>{ sel.diff=+el.dataset.d;
+        document.querySelectorAll('.diff').forEach(x=>x.classList.toggle('sel',x===el)); };
+    });
+    document.querySelectorAll('[data-add]').forEach(b=>{
+      b.onclick=()=>{
+        const w=parseFloat($('#w-in').value)||0, r=parseInt($('#r-in').value)||0;
+        if(w<=0||r<=0){ toast('Въведи тегло и повторения'); return; }
+        log.push({ id:Date.now()+'-'+Math.random().toString(36).slice(2,6),
+          date:todayKey(), exercise:b.dataset.add, weight:w, reps:r, diff:sel.diff });
+        saveLog(); toast('Серия записана ✓'); renderLog();
+      };
+    });
+    document.querySelectorAll('[data-del]').forEach(b=>{
+      b.onclick=()=>{ log=log.filter(x=>x.id!==b.dataset.del); saveLog(); renderLog(); };
+    });
+    const fin=$('#finish');
+    if(fin) fin.onclick=()=>{
+      const day=PROGRAM[state.currentDay];
+      const cnt=day.ex.reduce((s,e)=>s+todaySets(e.n).length,0);
+      if(cnt===0){ if(!confirm('Няма логнати серии. Сигурен ли си, че приключваш?')) return; }
+      state.currentDay=(state.currentDay+1)%4;
+      ui.expandedEx=null; ui.pickerOpen=false;
+      saveState();
+      toast(`Тренировка ${day.id} приключена! Следва ${PROGRAM[state.currentDay].id}`);
+      renderLog();
+    };
+    const exp=$('#exp-btn'); if(exp) exp.onclick=exportData;
+    const imp=$('#imp-btn'); if(imp) imp.onclick=()=>$('#import-file').click();
+  }
+
+  function allExercises(){
+    const set=new Set();
+    PROGRAM.forEach(d=>d.ex.forEach(e=>set.add(e.n)));
+    log.forEach(x=>set.add(x.exercise));
+    return [...set];
+  }
+  function renderProg(){
+    const exs=allExercises();
+    if(!exs.includes(ui.progEx)) ui.progEx=exs[0];
+    const rows=log.filter(x=>x.exercise===ui.progEx);
+    const byDate={};
+    rows.forEach(x=>{ const k=x.date;
+      if(!byDate[k]||e1rm(x.weight,x.reps)>e1rm(byDate[k].weight,byDate[k].reps)) byDate[k]=x; });
+    const series=Object.keys(byDate).sort().map(d=>byDate[d]);
+
+    let stats='';
+    if(series.length){
+      const f=series[0], l=series[series.length-1];
+      const diff=e1rm(l.weight,l.reps)-e1rm(f.weight,f.reps);
+      const ab=bestSet(rows);
+      stats=`<div class="stat-row">
+        <div class="stat"><div class="v">${ab.weight}<span style="font-size:12px"> кг</span></div>
+          <div class="l">Най-тежка серия</div></div>
+        <div class="stat"><div class="v">${diff>=0?'+':''}${diff}</div>
+          <div class="l">Ръст 1ПМ (кг)</div></div>
+        <div class="stat"><div class="v">${rows.length}</div>
+          <div class="l">Серии общо</div></div></div>`;
+    }
+    let chart;
+    if(series.length){
+      const vals=series.map(x=>e1rm(x.weight,x.reps));
+      const mx=Math.max(...vals), mn=Math.min(...vals), sp=mx-mn||1, pk=Math.max(...vals);
+      chart=`<div class="bars">${series.map((x,i)=>{
+        const h=30+((vals[i]-mn)/sp)*105;
+        const pr=vals[i]===pk&&i===series.length-1;
+        return `<div class="bar-wrap">
+          <div class="bar-val">${x.weight}${pr?'<span class="pr-tag">PR</span>':''}</div>
+          <div class="bar" style="height:${h}px"></div>
+          <div class="bar-date">${fmtDate(x.date)}</div></div>`;
+      }).join('')}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">
+        Височина = оценен 1ПМ · числото = вдигнати кг</div>`;
+    } else {
+      chart=`<div class="empty">Няма данни още.<br>Логни тренировки и кривата ще се появи.</div>`;
+    }
+    const hist=rows.slice().reverse().slice(0,30).map(x=>`
+      <div class="set-row">
+        <div class="set-dot" style="background:${DC[x.diff]}"></div>
+        <div class="set-main"><div class="set-ex">${fmtDate(x.date)}</div>
+          <div class="set-meta">${x.reps} повт. · трудност ${x.diff}/5 · оц.1ПМ ${e1rm(x.weight,x.reps)} кг</div></div>
+        <div class="set-load">${x.weight}<span> кг</span></div></div>`).join('');
+
+    $('#view-prog').innerHTML=`
+      <div class="panel"><label class="fld">Упражнение</label>
+        <select id="prog-sel">${exs.map(e=>`<option ${e===ui.progEx?'selected':''}>${e}</option>`).join('')}</select></div>
+      ${stats}
+      <div class="panel"><div class="sect-title">Крива на прогрес</div>${chart}</div>
+      <div class="panel"><div class="sect-title">История (${rows.length})</div>
+        ${hist||'<div class="empty">Празно.</div>'}</div>`;
+    $('#prog-sel').onchange=e=>{ ui.progEx=e.target.value; renderProg(); };
+  }
+
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.onclick=()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+      const isLog=t.dataset.tab==='log';
+      $('#view-log').style.display=isLog?'':'none';
+      $('#view-prog').style.display=isLog?'none':'';
+      if(isLog) renderLog(); else renderProg();
+    };
+  });
+
+  $('#import-file').onchange = e => {
+    if(e.target.files && e.target.files[0]) importData(e.target.files[0]);
+    e.target.value='';
+  };
+
+  load();
+  renderLog();
+})();
+</script>
+</body>
+</html>
